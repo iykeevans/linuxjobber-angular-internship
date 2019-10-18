@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Scrumuser } from '../scrumuser';
 
 @Component({
   selector: 'app-signup',
@@ -12,6 +13,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  userTypes = ['regular user', 'project owner']
+  userTypes = ['regular user', 'project owner'];
 
+  scrumUserModel = new Scrumuser('louis', 'louis@linuxjobber.com', 'testing123', 'regular user');
 }
