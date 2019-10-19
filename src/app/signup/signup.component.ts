@@ -15,5 +15,6 @@ export class SignupComponent implements OnInit {
 
   userTypes = ['regular user', 'project owner'];
 
-  scrumUserModel = new Scrumuser('louis', 'louis@linuxjobber.com', 'testing123', 'regular user');
+  scrumUserModel = new Scrumuser('louis', 'louis@linuxjobber.com', 'Yah004Life@', 'regular user');
+  emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 }
