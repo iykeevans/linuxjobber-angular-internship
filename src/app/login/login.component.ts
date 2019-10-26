@@ -20,15 +20,20 @@ export class LoginComponent implements OnInit {
   }
 
   emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  feedBk = '';
 
   onLoginSubmit() {
     this._scrumdataservice.login(this.scrumUserLoginData).subscribe(
       data => {
         console.log('SUCCESS', data);
+        this.feedBk = 'Successfully Logged In'
         localStorage.setItem('token', data.token);
         this._router.navigate(['/scrumboard']);
       },
-      error => console.log('ERROR', error)
+      error => {
+        console.log('ERROR', error);
+        this.feedBk = 'Invalid Credentials'
+      }
     )
   }
 }
