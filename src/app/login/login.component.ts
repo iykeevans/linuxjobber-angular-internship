@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Scrumuser } from '../scrumuser';
+import { ScrumdataService } from '../scrumdata.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +9,26 @@ import { Scrumuser } from '../scrumuser';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  scrumUserLoginData = {}
+
+  constructor(
+    private _scrumdataservice: ScrumdataService,
+    private _router: Router
+    ) {}
 
   ngOnInit() {
   }
 
-  scrumUserModel = new Scrumuser('', '', '', '', '');
   emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  onSubmit() {
-    console.log(this.scrumUserModel);
+  onLoginSubmit() {
+    this._scrumdataservice.login(this.scrumUserLoginData).subscribe(
+      data => {
+        console.log('SUCCESS', data);
+        localStorage.setItem('token', data.token);
+        this._router.navigate(['/scrumboard']);
+      },
+      error => console.log('ERROR', error)
+    )
   }
 }
